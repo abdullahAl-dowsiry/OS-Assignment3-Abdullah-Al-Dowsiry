@@ -1,8 +1,8 @@
-# 📝 MY_WORK: Student Information, Development Log, Reflection & Answers
+ 📝 MY_WORK: Student Information, Development Log, Reflection & Answers
 
 > This is the **only file** your instructor reads to grade Parts 3 and 4 (documentation and video). Everything you write here must be **in your own words**.
 
----
+---#
 
 ## 🛑 STOP: Read This Before You Do Anything Else
 
@@ -32,11 +32,11 @@
 
 | Field | Your Answer |
 |-------|-------------|
-| **Full Name** | [Write your full name here] |
-| **Student ID** | [Write your student ID here] |
-| **University Email** | [yourid]@std.psau.edu.sa |
-| **GitHub Username** | [your-github-username] |
-| **Repository Link** | [Paste your repository link here] |
+| **Full Name** | Abdullah Feaz Aldowsiry |
+| **Student ID** | 445050221 |
+| **University Email** | 445050221@std.psau.edu.sa |
+| **GitHub Username** | abdullahAl-dowsiry |
+| **Repository Link** | https://github.com/abdullahAl-dowsiry/OS-Assignment3-Abdullah-Al-Dowsiry |
  
 ---
 
@@ -132,68 +132,107 @@
 
 ## Your Development Log
 
-### Entry 1 - [Date and Time]
-**What I did**:
+### Entry 1 - [November 10, 2026, Evening]
 
-**Details**:
+What I did: Set up my GitHub repository and cloned the assignment project into VS Code.
 
-**Challenges**:
+Details:
 
-**Solution**:
+* Forked the original Assignment 3 repository and renamed my copy.
+* Used Git Clone to download the repository into my Documents folder.
+* Opened the project in VS Code and checked its files.
 
-**Time spent**:
+Challenges: At first, I typed Git Clone into the VS Code search panel instead of opening the command menu. I also had difficulty finding where to select the destination folder.
 
----
+Solution: I used the Git Clone command correctly, selected the Documents folder, and opened the cloned repository in VS Code.
 
-### Entry 2 - [Date and Time]
-**What I did**:
+Time spent: 30 minute
 
-**Details**:
-
-**Challenges**:
-
-**Solution**:
-
-**Time spent**:
 
 ---
 
-### Entry 3 - [Date and Time]
-**What I did**:
+### Entry 2 - [November 11, 2026, Afternoon]
 
-**Details**:
+What I did: Implemented Feature 1 to protect the shared ready queue using ReentrantLock.
 
-**Challenges**:
+Details:
 
-**Solution**:
+* Added a ReentrantLock named queueLock inside the ReadyQueue class.
+* Protected the add(), poll(), processOf(), and snapshot() methods.
+* Used lock(), try, and finally to ensure the lock is released correctly.
+* Compiled and tested the program.
+* Committed and pushed Feature 1 to GitHub.
 
-**Time spent**:
+Challenges: I had difficulty identifying where to place the lock and unlock statements without breaking the methods.
 
----
+Solution: I reviewed the critical sections and placed the shared queue operations inside try/finally blocks to ensure mutual exclusion.
 
-### Entry 4 - [Date and Time]
-**What I did**:
+Time spent: 60 minute
 
-**Details**:
-
-**Challenges**:
-
-**Solution**:
-
-**Time spent**:
 
 ---
 
-### Entry 5 - [Date and Time]
-**What I did**:
+### Entry 3 - [November 11, 2026, Afternoon]
 
-**Details**:
+What I did: Implemented Feature 2 to protect the shared statistics from race conditions.
 
-**Challenges**:
+Details:
 
-**Solution**:
+* Added a ReentrantLock named statsLock inside the SharedStats class.
+* Protected contextSwitchCount, completedProcessCount, and totalServiceTime.
+* Used lock() and try/finally in the methods that update these variables.
+* Protected the getter methods to ensure synchronized reads.
+* Successfully compiled the Java file and pushed Feature 2 to GitHub.
 
-**Time spent**:
+Challenges: I needed to understand why the shared counters required synchronization and how to protect their reading and updating operations.
+
+Solution: I used one ReentrantLock for the three statistics and applied try/finally blocks to release the lock safely.
+
+Time spent: 45 minute
+
+
+---
+
+### Entry 4 - [November 11, 2026, Evening]
+
+What I did: Implemented Feature 3 to replace busy waiting with a counting semaphore.
+
+Details:
+
+* Added a Semaphore named availableItems to the ReadyQueue class.
+* Used release() when a process was added to the ready queue.
+* Added take() with acquire() so CPU threads wait when the queue is empty.
+* Removed the old busy-waiting loop from CpuWorker.
+* Added wakeWaitingCPUs() to allow blocked CPU threads to terminate.
+* Ran the program five times and passed all four verification checks.
+* Committed and pushed Feature 3 to GitHub.
+
+Challenges: I had difficulty replacing the polling loop without causing errors or leaving CPU threads blocked.
+
+Solution: I used the semaphore to block CPUs until work became available and added a shutdown mechanism. After correcting the code, all five tests passed with zero busy-waiting polls.
+
+Time spent: 45 minute
+
+
+---
+
+### Entry 5 - [November 12, 2026, Evening]
+
+What I did: Started documenting my work in the MY_WORK.md file.
+
+Details:
+
+* Read the documentation requirements and reviewed the development log instructions.
+* Filled in my student information and GitHub repository link.
+* Documented my work on the repository setup and the three synchronization features.
+* Reviewed the successful verification results from my final program.
+
+Challenges: I initially had difficulty locating the Student Information and Development Log sections in the file.
+
+Solution: I used the search feature in VS Code to find the correct sections and filled them in step by step.
+
+Time spent: 15 minute
+
 
 ---
 
@@ -214,13 +253,15 @@
 
 > 💡 **TIP:** Fill this in **last**, after all entries are written.
 
-**Total time spent on assignment**: [X hours]
+Development Log Summary
 
-**Most challenging part**:
+Total time spent on assignment: 3 hours and 15 minutes.
 
-**Most interesting learning**:
+Most challenging part: Replacing busy waiting with a counting semaphore in Feature 3. I needed to make sure that CPU threads could wait for processes without getting stuck.
 
-**What I would do differently next time**:
+Most interesting learning: I learned how ReentrantLock protects shared data from race conditions and how Semaphore allows threads to wait without busy waiting. Seeing all four verification checks pass helped me understand synchronization better.
+
+What I would do differently next time: I would read the code more carefully before making changes, test each feature separately, and document my progress after every work session.
 
 ---
 
@@ -240,7 +281,17 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+I learned that synchronization helps threads work safely
+
+Race conditions can happen when threads use the same data
+
+I used ReentrantLock to protect shared data
+
+I used try finally to release the locks
+
+I also used Semaphore to stop busy waiting
+
+After these changes my program passed all the tests
 
 ## Question 2: What was the most challenging part of this assignment?
 
@@ -248,7 +299,17 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+The hardest part was Feature 3
+
+I had to remove busy waiting
+
+It was difficult to understand Semaphore at first
+
+I was worried that some CPU threads would get stuck
+
+I tested the program many times to fix the problem
+
+Finally the program worked and passed all the tests
 
 ## Question 3: How did you overcome the challenges you faced?
 
@@ -256,7 +317,17 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+I tried to understand the code first
+
+I checked the errors in VS Code
+
+I asked for help when I had problems
+
+I fixed the code step by step
+
+I tested the program after making changes
+
+Finally I solved the problems and the program worked
 
 ## Question 4: Where can synchronization concepts be applied in real-world applications?
 
@@ -264,7 +335,17 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+Synchronization is useful in banking systems
+
+It helps keep account balances correct
+
+It is also useful in ticket booking systems
+
+ReentrantLock can stop two threads from booking the same seat
+
+Semaphore can help manage waiting jobs in a print queue
+
+These tools help prevent problems with shared data
 
 ### Optional: What would you like to learn more about?
 
@@ -298,20 +379,49 @@
 
 **Your Answer:** *(3-5 sentences)*
 
-[Write your answer here.]
+My first program had race conditions because the shared data was not protected
 
-Verification block of the **original starter**:
-```
-[Paste the verification block (or the exception/watchdog message) of the starter here]
-```
+Two CPU threads could read the same value before updating it
 
-Verification block of **my final version**:
-```
-[Paste the verification block of your final version here (all lines ✔)]
-```
+This caused lost updates and incorrect results
 
-**Explanation of the timeline:**
-[Explain the lost update step by step.]
+RaceWindow made this problem easier to see but it can also happen without it
+
+The problem is hard to detect because it depends on when the threads run
+
+Verification block of the original starter:
+
+Context switches
+expected 32 observed 28 MISMATCH
+Completed processes
+expected 15 observed 13 MISMATCH
+Total service time
+expected 71917 observed 62018 MISMATCH
+Busy waiting polls
+expected 0 observed 834 MISMATCH
+
+Verification block of my final version:
+
+Context switches
+expected 32 observed 32 PASS
+Completed processes
+expected 15 observed 15 PASS
+Total service time
+expected 71917 observed 71917 PASS
+Busy waiting polls
+expected 0 observed 0 PASS
+
+Explanation of the timeline:
+
+CPU 1 reads contextSwitchCount as 12
+
+CPU 2 reads the same value 12 before CPU 1 updates it
+
+RaceWindow pause makes this overlap easier to happen
+
+CPU 1 writes 13 and CPU 2 also writes 13
+
+The correct value should be 14 but the result is 13 so one update is lost
 
 ## Question 2: Critical Sections and Lock Granularity
 
@@ -321,12 +431,26 @@ Verification block of **my final version**:
 
 **Your Answer:** *(3-5 sentences)*
 
-[Write your answer here.]
 
-| Critical section (variable / method) | Lock used | Why it needs protection |
-|---|---|---|
-| [e.g., `ReadyQueue.poll()`] | [lock name] | [reason] |
-| [...] | [...] | [...] |
+I used queueLock to protect the ready queue and statsLock to protect the shared statistics
+
+I used one statsLock for all three counters because it is simpler but separate locks could reduce waiting
+
+I used a different lock for the queue so it does not block statistics operations
+
+ReentrantLock provides mutual exclusion and try finally releases the lock so other threads can make progress
+
+The default ReentrantLock is not fair so bounded waiting is not guaranteed and some threads may wait longer
+
+Critical section	Lock used	Why it needs protection
+ReadyQueue add()	queueLock	Protects the shared list and map
+ReadyQueue poll()	queueLock	Prevents two CPUs from removing the same thread
+ReadyQueue processOf()	queueLock	Protects access to the shared map
+ReadyQueue snapshot()	queueLock	Protects reading the shared queue
+contextSwitchCount	statsLock	Prevents lost updates
+completedProcessCount	statsLock	Prevents incorrect counting
+totalServiceTime	statsLock	Prevents lost updates
+SharedStats getter methods	statsLock	Protects reads of shared statistics
 
 ## Question 3: Busy Waiting vs Semaphore
 
@@ -336,7 +460,15 @@ Verification block of **my final version**:
 
 **Your Answer:** *(3-5 sentences)*
 
-[Write your answer here.]
+In my first test busy waiting caused 834 polls because CPUs kept checking the empty queue
+
+I used a Semaphore called availableItems with an initial value of 0 to count available processes
+
+After adding 15 processes the semaphore has 15 permits if no CPU has taken any yet
+
+In my final program CPUs wait using acquire instead of busy waiting
+
+When the last process finishes release wakes the waiting CPUs so they can stop otherwise they could wait forever
 
 ## Question 4: Classical Problems and Deadlock
 
@@ -346,25 +478,57 @@ Verification block of **my final version**:
 
 **Your Answer:** *(3-5 sentences)*
 
-**Classical problem and roles**:
-[Name the problem; who is the producer, who is the consumer?]
 
-**Semaphores for a bounded queue (name and initial value)**:
-[Name the three semaphores and their initial values.]
+This is the Producer Consumer problem
 
-**Deadlock scenario and prevention**:
-[Describe the scenario and the necessary condition you would break.]
+The main thread adds processes and the CPU workers consume them but CPU workers can also add processes back to the queue
+
+For a bounded queue we need empty with K permits and full with 0 permits and mutex with 1 permit
+
+Deadlock can happen if a producer holds mutex while waiting for an empty slot because the consumer cannot enter the queue
+
+We can prevent this by waiting for an empty slot before taking mutex and this breaks the hold and wait condition
+
+Classical problem and roles:
+
+Producer Consumer problem
+
+Producer is the main thread and CPU workers when they add processes back
+
+Consumer is the CPU worker when it takes a process
+
+Semaphores for a bounded queue:
+
+empty = K
+
+full = 0
+
+mutex = 1
+
+Deadlock scenario and prevention:
+
+A producer locks mutex when the queue is full
+
+The producer waits for empty but the consumer cannot take mutex to remove a process
+
+Both threads become stuck
+
+To prevent this the producer must wait for empty before locking mutex
+
+This avoids holding mutex while waiting for another resource
 
 ## Summary
 
-**Key concepts I understood through these questions:**
-1.
-2.
-3.
+Key concepts I understood through these questions:
 
-**Concepts I need to study more:**
-1.
-2.
+1. I learned how race conditions happen
+2. I learned how ReentrantLock protects shared data
+3. I learned how Semaphore prevents busy waiting
+
+Concepts I need to study more:
+
+1. How to prevent deadlock
+2. How to choose the correct locks
 
 ---
 
